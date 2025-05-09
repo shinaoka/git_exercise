@@ -1,4 +1,5 @@
 using Zygote
+using Plots
 
 # 関数定義: 2次元ベクトル入力 → スカラー出力
 f(x) = x[1]^2 + 3x[2]^2 + sin(x[1]*x[2])
@@ -14,4 +15,5 @@ println("∇f(x) = ", ∇f)
 xs = ys = -2:0.1:2
 Z = [f([x, y]) for x in xs, y in ys]
 
-@show Z
+contour(xs, ys, Z', title="f(x) contours")
+quiver!([x[1]], [x[2]], quiver=([∇f[1]], [∇f[2]]), color=:red, label="∇f")
